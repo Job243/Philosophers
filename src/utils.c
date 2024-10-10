@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 18:17:28 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/09 22:11:33 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/10 23:10:56 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ void	check_philos(t_table *table)
 				pthread_mutex_unlock(&table->all_alive_mutex);
 				pthread_mutex_unlock(&table->philo[i].meal_mutex);
 				usleep(10);
+				check_total_meals(table->philo);
 				print_action(table->philo[i].id, " died");
 				return ;
 			}
 			pthread_mutex_unlock(&table->philo[i].meal_mutex);
 			i++;
 		}
-		usleep(10000);
+		usleep(100);
 	}
 }
 

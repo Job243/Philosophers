@@ -6,7 +6,7 @@
 #    By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 19:29:05 by jmafueni          #+#    #+#              #
-#    Updated: 2024/10/09 22:28:36 by jmafueni         ###   ########.fr        #
+#    Updated: 2024/10/10 23:00:02 by jmafueni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC_DIR = src
 INCLUDE_DIR = include
 OBJ_DIR = obj
 
-SRC = $(SRC_DIR)/init.c $(SRC_DIR)/philo.c $(SRC_DIR)/utils.c \
+SRC = $(SRC_DIR)/init.c $(SRC_DIR)/philo.c $(SRC_DIR)/utils.c $(SRC_DIR)/routine.c \
+	$(SRC_DIR)/utils_2.c \
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

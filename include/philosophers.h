@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:08:59 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/09 21:43:32 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:58:56 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <limits.h>
 
 typedef struct s_philosopher
 {
@@ -46,14 +47,24 @@ typedef struct s_table
 	t_philosopher	*philo;
 }	t_table;
 
-void	assign_philo_number(t_table *table);
-void	check_philos(t_table *table);
-void	created_threads(t_table *table);
-long	get_time(void);
-void	init_philosophers(t_table *table);
-void	join_threads(t_table *table);
-void	print_action(int philo_id, const char *action);
-void	start_simulation(t_table *table);
-void	*philosopher_routine(void *arg);
+int					is_space(char c);
+int					is_digit(int c);
+long				atol(const char *str);
+const char			*valid_input(const char *str);
+void				assign_philo_number(t_table *table);
+void				check_philos(t_table *table);
+void				check_total_meals(t_philosopher *philo);
+void				created_threads(t_table *table);
+void				eat(t_philosopher *philo);
+long				get_time(void);
+void				init_philosophers(t_table *table);
+void				join_threads(t_table *table);
+void				print_action(int philo_id, const char *action);
+void				release_forks(t_philosopher *philo);
+void				sleep_philo(t_philosopher *philo);
+void				take_forks(t_philosopher *philo);
+void				start_simulation(t_table *table);
+void				think(t_philosopher *philo);
+void				*philosopher_routine(void *arg);
 
 #endif
