@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:08:59 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/10 22:58:56 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/10 23:21:27 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ typedef struct s_table
 
 int					is_space(char c);
 int					is_digit(int c);
-long				atol(const char *str);
 const char			*valid_input(const char *str);
 void				assign_philo_number(t_table *table);
 void				check_philos(t_table *table);
 void				check_total_meals(t_philosopher *philo);
 void				created_threads(t_table *table);
 void				eat(t_philosopher *philo);
+long				ft_atol(const char *str);
 long				get_time(void);
 void				init_philosophers(t_table *table);
 void				join_threads(t_table *table);

@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:29:58 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/09 21:50:25 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/10 23:23:56 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ int	main(int ac, char **av)
 	total_meals = -1;
 	if (ac < 5 || ac > 6)
 	{
-		printf("Usage: %s <number_of_philosopher> <time_to_die> <time_to_eat> <time_to_sleep>\n", av[0]);
+		printf("Usage: <number_of_philosopher> <time_to_die> <time_to_eat> <time_to_sleep>\n");
 		return (1);
 	}
-	philo_nbr = atoi(av[1]);
-	time_to_die = atoi(av[2]);
-	time_to_eat = atoi(av[3]);
-	time_to_sleep = atoi(av[4]);
+	philo_nbr = ft_atol(av[1]);
+	time_to_die = ft_atol(av[2]);
+	time_to_eat = ft_atol(av[3]);
+	time_to_sleep = ft_atol(av[4]);
 
 	if (ac == 6)
-		total_meals = atoi(av[5]);
+		total_meals = ft_atol(av[5]);
 	table = init_table(philo_nbr);
 	if (!table)
 	{

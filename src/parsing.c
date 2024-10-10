@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:52:25 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/10 22:15:58 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/10 23:23:00 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ const char	*valid_input(const char *str)
 	if (!is_digit(*str))
 		return (0);
 	num = str;
-	while (ft_isdigit(*str++))
+	while (is_digit(*str++))
 		len++;
 	if (len > 10)
 		return (0);
 	return (num);
 }
 
-long	atol(const char *str)
+long	ft_atol(const char *str)
 {
 	long	num;
 
