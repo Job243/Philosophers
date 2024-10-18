@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:31:05 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/18 19:47:43 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:59:43 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,13 @@ void	init_philosophers(t_table *table)
 	assign_philo_number(table);
 }
 
-// void	*philosopher_routine(void *arg)
-// {
-// 	t_philosopher	*philo;
-
-// 	philo = (t_philosopher *)arg;
-// 	while (philo->table->all_alive && (philo->table->total_meals == -1
-// 			|| philo->meals_eaten < philo->table->total_meals))
-// 	{
-// 		take_forks(philo);
-// 		eat(philo);
-// 		release_forks(philo);
-// 		sleep_philo(philo);
-// 		think(philo);
-// 	}
-// 	return (NULL);
-// }
-
 void	*philosopher_routine(void *arg)
 {
-	t_philosopher *philo = (t_philosopher *)arg;
+	t_philosopher	*philo;
 
+	philo = (t_philosopher *)arg;
 	while (is_alive(philo))
 	{
-		// if (check_total_meals(philo))
-		// 	break;
 		take_forks(philo);
 		eat(philo);
 		release_forks(philo);
@@ -64,30 +46,6 @@ void	*philosopher_routine(void *arg)
 	}
 	pthread_exit(NULL);
 }
-
-
-// void	*philosopher_routine(void *arg)
-// {
-// 	t_philosopher	*philo;
-
-// 	philo = (t_philosopher *)arg;
-// 	while (1)
-// 	{
-// 		if (!is_alive(philo))
-// 			pthread_exit(NULL);
-// 		pthread_mutex_unlock(&philo->table->all_alive_mutex);
-// 		take_forks(philo);
-// 		eat(philo);
-// 		pthread_mutex_lock(&philo->meal_mutex);
-// 		philo->meals_eaten++; // Protected access to meals_eaten
-// 		pthread_mutex_unlock(&philo->meal_mutex);
-// 		release_forks(philo);
-// 		sleep_philo(philo);
-// 		think(philo);
-// 	}
-// 	pthread_exit(NULL);
-// }
-
 
 void	created_threads(t_table *table)
 {

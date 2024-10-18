@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:13:36 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/18 19:45:25 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 20:00:07 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	think(t_philosopher *philo)
 void	take_forks(t_philosopher *philo)
 {
 	if (!is_alive(philo))
-		return;
+		return ;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		if (!is_alive(philo))
 		{
 			pthread_mutex_unlock(philo->right_fork);
-			return;
+			return ;
 		}
 		print_action(philo->id, M"has taken the right fork"RST);
 		pthread_mutex_lock(philo->left_fork);
