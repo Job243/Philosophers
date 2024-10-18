@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:52:25 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/10 23:23:00 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:49:34 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_digit(int c)
 const char	*valid_input(const char *str)
 {
 	int			len;
-	const char *num;
+	const char	*num;
 
 	len = 0;
 	while (is_space(*str))

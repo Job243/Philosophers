@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:08:59 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/10 23:21:27 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:19:37 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <limits.h>
+# define RST	"\033[0m" /* Reset the color by default color*/
+# define B		"\e[1;90m"/*Black*/
+# define RED	"\033[1;31m" /*Red*/
+# define G		"\e[1;92m" /*Green*/
+# define Y		"\e[1;93m" /*Yellow*/
+# define BLUE	"\e[1;94m" /*Blue*/
+# define M		"\e[1;95m" /*Magenta*/
+# define C		"\e[1;96m" /*Cyan*/
+# define W		"\e[1;97m" /*White*/
 
 typedef struct s_philosopher
 {
@@ -47,16 +56,21 @@ typedef struct s_table
 	t_philosopher	*philo;
 }	t_table;
 
+int					is_alive(t_philosopher *philo);
 int					is_space(char c);
 int					is_digit(int c);
+int					philosopher_died(t_philosopher *philo);
 const char			*valid_input(const char *str);
 void				assign_philo_number(t_table *table);
 void				check_philos(t_table *table);
 void				check_total_meals(t_philosopher *philo);
+void				clean_up(t_table *table);
 void				created_threads(t_table *table);
 void				eat(t_philosopher *philo);
 long				ft_atol(const char *str);
+void				ft_error(const char *msg);
 long				get_time(void);
+void				handle_philosopher_death(t_philosopher *philo);
 void				init_philosophers(t_table *table);
 void				join_threads(t_table *table);
 void				print_action(int philo_id, const char *action);
