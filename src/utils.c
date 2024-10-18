@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 18:17:28 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/18 19:58:17 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/19 01:06:34 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	check_total_meals(t_philosopher *philo)
 		pthread_mutex_lock(&philo->table->all_alive_mutex);
 		philo->table->all_alive = 0;
 		pthread_mutex_unlock(&philo->table->all_alive_mutex);
-		printf(BLUE"All philosophers have eaten"RST
-			BLUE" the required number of meals!\n"RST);
+		printf(BLUE "All philosophers have eaten" RST BLUE " the required number of meals!\n" RST);
 		clean_up(philo->table);
 	}
 	return (full);
@@ -51,14 +50,16 @@ void	assign_philo_number(t_table *table)
 	}
 }
 
-void	print_action(int philo_id, const char *action)
+void	print_action(t_philosopher *philo, const char *action)
 {
 	struct timeval	tv;
 	long			timestamp;
+	long			start;
 
+	start = philo->table->start_time;
 	gettimeofday(&tv, NULL);
 	timestamp = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	printf(G"[%ld] Philosopher %d %s\n"RST, timestamp, philo_id, action);
+	printf(G "%ld %d %s\n" RST, timestamp - start, philo->id, action);
 }
 
 long	get_time(void)
@@ -71,6 +72,6 @@ long	get_time(void)
 
 void	ft_error(const char *msg)
 {
-	printf(RED"%s\n"RST, msg);
+	printf(RED "%s\n" RST, msg);
 	exit(EXIT_FAILURE);
 }

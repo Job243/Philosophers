@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:31:05 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/18 19:59:43 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/19 01:20:46 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_philosophers(t_table *table)
 		table->philo[i].right_fork = &table->forks[(i + 1) % table->philo_nbr];
 		pthread_mutex_init(&table->forks[i], NULL);
 		pthread_mutex_init(&table->philo[i].meal_mutex, NULL);
+		table->start_time = get_time();
 		table->philo[i].table = table;
 		i++;
 	}
@@ -39,6 +40,7 @@ void	*philosopher_routine(void *arg)
 	while (is_alive(philo))
 	{
 		take_forks(philo);
+		printf("routine");
 		eat(philo);
 		release_forks(philo);
 		sleep_philo(philo);
@@ -54,8 +56,8 @@ void	created_threads(t_table *table)
 	i = 0;
 	while (i < table->philo_nbr)
 	{
-		pthread_create(&table->philo[i].thread, NULL,
-			philosopher_routine, &table->philo[i]);
+		pthread_create(&table->philo[i].thread, NULL, philosopher_routine,
+			&table->philo[i]);
 		i++;
 	}
 }

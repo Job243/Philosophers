@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:53:15 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/18 20:02:25 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/19 01:14:38 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	handle_philosopher_death(t_philosopher *philo)
 	pthread_mutex_lock(&philo->table->all_alive_mutex);
 	philo->table->all_alive = 0;
 	pthread_mutex_unlock(&philo->table->all_alive_mutex);
-	print_action(philo->id, RED" died"RST);
+	print_action(philo, RED" died"RST);
 	usleep(10);
 	clean_up(philo->table);
 }
@@ -60,6 +60,7 @@ void	check_philos(t_table *table)
 		i = 0;
 		while (i < table->philo_nbr)
 		{
+		printf("routine\n");
 			if (philosopher_died(&table->philo[i]))
 			{
 				handle_philosopher_death(&table->philo[i]);

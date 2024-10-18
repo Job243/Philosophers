@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:29:58 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/15 19:15:38 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/19 01:19:57 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,16 @@ int	main(int ac, char **av)
 	clean_up(table);
 	return (0);
 }
+
+
+/*
+	1. faire un cas special pour un seul:
+		wait time to die puis le faire mourir
+
+	2. ./philo 3 120 60 60
+		infinite loop
+	3. enlever release firks
+
+	4.
+
+*/
