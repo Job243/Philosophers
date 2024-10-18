@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:08:59 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/15 22:19:37 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:41:34 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_table
 	t_philosopher	*philo;
 }	t_table;
 
+int				check_total_meals(t_philosopher *philo);
 int					is_alive(t_philosopher *philo);
 int					is_space(char c);
 int					is_digit(int c);
@@ -63,7 +64,6 @@ int					philosopher_died(t_philosopher *philo);
 const char			*valid_input(const char *str);
 void				assign_philo_number(t_table *table);
 void				check_philos(t_table *table);
-void				check_total_meals(t_philosopher *philo);
 void				clean_up(t_table *table);
 void				created_threads(t_table *table);
 void				eat(t_philosopher *philo);

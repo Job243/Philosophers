@@ -6,13 +6,13 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 18:17:28 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/15 18:37:30 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:53:12 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	check_total_meals(t_philosopher *philo)
+int	check_total_meals(t_philosopher *philo)
 {
 	int	i;
 	int	full;
@@ -22,7 +22,7 @@ void	check_total_meals(t_philosopher *philo)
 	while (i < philo->table->philo_nbr)
 	{
 		pthread_mutex_lock(&philo[i].meal_mutex);
-		if (philo->meals_eaten < philo->table->total_meals)
+		if (philo[i].meals_eaten < philo->table->total_meals)
 			full = 0;
 		pthread_mutex_unlock(&philo[i].meal_mutex);
 		i++;
@@ -32,10 +32,11 @@ void	check_total_meals(t_philosopher *philo)
 		pthread_mutex_lock(&philo->table->all_alive_mutex);
 		philo->table->all_alive = 0;
 		pthread_mutex_unlock(&philo->table->all_alive_mutex);
+		printf(BLUE"All philosophers have eaten the required number of meals!\n"RST);
 		clean_up(philo->table);
-		printf("All philosophers have eaten the required number of meals!\n");
-		exit(0);
+		// exit(0);
 	}
+	return (full);
 }
 
 void	assign_philo_number(t_table *table)

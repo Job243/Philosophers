@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:31:05 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/15 23:04:17 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:47:43 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,17 @@ void	*philosopher_routine(void *arg)
 {
 	t_philosopher *philo = (t_philosopher *)arg;
 
-	while (1)
+	while (is_alive(philo))
 	{
-		if (!is_alive(philo))
-			pthread_exit(NULL);
+		// if (check_total_meals(philo))
+		// 	break;
 		take_forks(philo);
 		eat(philo);
 		release_forks(philo);
 		sleep_philo(philo);
 		think(philo);
-		if (!is_alive(philo))
-			pthread_exit(NULL);
 	}
-	return (NULL);
+	pthread_exit(NULL);
 }
 
 

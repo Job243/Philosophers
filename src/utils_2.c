@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:53:15 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/15 22:18:55 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:50:03 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ void	handle_philosopher_death(t_philosopher *philo)
 	pthread_mutex_lock(&philo->table->all_alive_mutex);
 	philo->table->all_alive = 0;  // Set simulation state to dead
 	pthread_mutex_unlock(&philo->table->all_alive_mutex);
-
 	print_action(philo->id, RED" died"RST);
-	check_total_meals(philo->table->philo); // Check meals after death
+	// check_total_meals(philo->table->philo); // Check meals after death
 	usleep(10);
 	clean_up(philo->table);
 }
@@ -50,6 +49,7 @@ void	check_philos(t_table *table)
 
 	while (1)
 	{
+
 		pthread_mutex_lock(&table->all_alive_mutex);
 		if (!table->all_alive)  // Stop if a philosopher has died
 		{
@@ -67,6 +67,8 @@ void	check_philos(t_table *table)
 			}
 			i++;
 		}
+		if (check_total_meals(table->philo))
+			break;
 		usleep(100); // Small delay between checks
 	}
 }

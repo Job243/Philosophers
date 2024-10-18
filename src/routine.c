@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:13:36 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/18 16:35:30 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:45:25 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	think(t_philosopher *philo)
 
 void	take_forks(t_philosopher *philo)
 {
-	// Vérification avant de tenter de prendre les fourchettes
 	if (!is_alive(philo))
 		return;
 	if (philo->id % 2 == 0)
