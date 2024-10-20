@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:31:05 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/19 01:20:46 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:10:14 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	init_philosophers(t_table *table)
 	int	i;
 
 	i = 0;
+	table->forks = malloc(sizeof(pthread_mutex_t) * table->philo_nbr);
+	if (!table->forks)
+		return ;
 	while (i < table->philo_nbr)
 	{
 		table->philo[i].meals_eaten = 0;
@@ -25,10 +28,10 @@ void	init_philosophers(t_table *table)
 		table->philo[i].right_fork = &table->forks[(i + 1) % table->philo_nbr];
 		pthread_mutex_init(&table->forks[i], NULL);
 		pthread_mutex_init(&table->philo[i].meal_mutex, NULL);
-		table->start_time = get_time();
 		table->philo[i].table = table;
 		i++;
 	}
+	table->start_time = get_time();
 	assign_philo_number(table);
 }
 
@@ -39,15 +42,30 @@ void	*philosopher_routine(void *arg)
 	philo = (t_philosopher *)arg;
 	while (is_alive(philo))
 	{
-		take_forks(philo);
-		printf("routine");
 		eat(philo);
-		release_forks(philo);
 		sleep_philo(philo);
 		think(philo);
 	}
-	pthread_exit(NULL);
+	return (NULL);
 }
+
+// void	*philosopher_routine(void *arg)
+// {
+// 	t_philosopher	*philo;
+
+// 	philo = (t_philosopher *)arg;
+// 	while (1)
+// 	{
+// 		if (!is_alive(philo))
+// 			break ;
+// 		// take_forks(philo);
+// 		eat(philo);
+// 		// release_forks(philo);
+// 		sleep_philo(philo);
+// 		think(philo);
+// 	}
+// 	return (NULL);
+// }
 
 void	created_threads(t_table *table)
 {
@@ -69,10 +87,12 @@ void	join_threads(t_table *table)
 	i = 0;
 	while (i < table->philo_nbr)
 	{
-		pthread_join(table->philo[i].thread, NULL);
+		if (pthread_join(table->philo[i].thread, NULL) != 0)
+			printf("Failed to join thread number %d\n", i);
 		i++;
 	}
 }
+
 
 void	start_simulation(t_table *table)
 {

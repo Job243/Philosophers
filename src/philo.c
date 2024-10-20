@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:29:58 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/19 01:19:57 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/20 23:36:49 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	main(int ac, char **av)
 	else
 		table->total_meals = -1;
 	start_simulation(table);
-	clean_up(table);
 	return (0);
 }
 
@@ -65,7 +64,7 @@ int	main(int ac, char **av)
 	2. ./philo 3 120 60 60
 		infinite loop
 	3. enlever release firks
-
+&& (philo->table->total_meals == -1 || philo->meals_eaten < philo->table->total_meals)
 	4.
 
 */

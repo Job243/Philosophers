@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:08:59 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/19 00:52:02 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/20 21:28:35 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ long				get_time(void);
 void				handle_philosopher_death(t_philosopher *philo);
 void				init_philosophers(t_table *table);
 void				join_threads(t_table *table);
+void				manage_forks(t_philosopher *philo, int action);
+void				monitor_philosophers(t_table *table);
 void				print_action(t_philosopher *philo, const char *action);
 void				release_forks(t_philosopher *philo);
 void				sleep_philo(t_philosopher *philo);

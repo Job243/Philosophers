@@ -6,17 +6,21 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 18:17:28 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/19 01:06:34 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:01:58 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
+
+#include <stdbool.h>
 
 int	check_total_meals(t_philosopher *philo)
 {
 	int	i;
 	int	full;
 
+	if (philo->table->total_meals <= 0)
+		return (0);
 	i = 0;
 	full = 1;
 	while (i < philo->table->philo_nbr)
@@ -33,7 +37,6 @@ int	check_total_meals(t_philosopher *philo)
 		philo->table->all_alive = 0;
 		pthread_mutex_unlock(&philo->table->all_alive_mutex);
 		printf(BLUE "All philosophers have eaten" RST BLUE " the required number of meals!\n" RST);
-		clean_up(philo->table);
 	}
 	return (full);
 }
@@ -52,13 +55,11 @@ void	assign_philo_number(t_table *table)
 
 void	print_action(t_philosopher *philo, const char *action)
 {
-	struct timeval	tv;
 	long			timestamp;
 	long			start;
 
 	start = philo->table->start_time;
-	gettimeofday(&tv, NULL);
-	timestamp = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	timestamp = get_time();
 	printf(G "%ld %d %s\n" RST, timestamp - start, philo->id, action);
 }
 
