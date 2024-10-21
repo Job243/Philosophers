@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:13:36 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/21 00:03:15 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:03:43 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,16 @@ void	eat(t_philosopher *philo)
 	philo->last_meal = get_time();
 	usleep(philo->table->time_to_eat * 1000);
 	philo->meals_eaten++;
-	printf("Philosopher %d has eaten %d meals.\n", philo->id, philo->meals_eaten);
 	pthread_mutex_unlock(&philo->meal_mutex);
 	release_forks(philo);
 }
 
-void	sleep_philo(t_philosopher *philo)
+void	think_n_sleep(t_philosopher *philo)
 {
-	if (!is_alive(philo))
+	if (!is_alive(philo) || (philo->meals_eaten >= philo->table->total_meals))
 		return ;
 	print_action(philo, B"is sleeping"RST);
 	usleep(philo->table->time_to_sleep * 1000);
-}
-
-void	think(t_philosopher *philo)
-{
 	pthread_mutex_lock(&philo->table->all_alive_mutex);
 	if (!philo->table->all_alive)
 	{
@@ -46,23 +41,19 @@ void	think(t_philosopher *philo)
 	usleep(200);
 }
 
-
 void	take_forks(t_philosopher *philo)
 {
 	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, M"has taken the right fork"RST);
-
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, C"has taken the left fork"RST);
 	}
 	else
 	{
-		// usleep(100);
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, C"has taken the left fork"RST);
-
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, M"has taken the right fork"RST);
 	}
@@ -73,4 +64,3 @@ void	release_forks(t_philosopher *philo)
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
-

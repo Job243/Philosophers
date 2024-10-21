@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:53:15 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/21 00:11:19 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:04:47 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ int	is_alive(t_philosopher *philo)
 	if (!philo->table->all_alive)
 	{
 		pthread_mutex_unlock(&philo->table->all_alive_mutex);
-		return (0); // Le philosophe n'est pas vivant
+		return (0);
 	}
 	pthread_mutex_unlock(&philo->table->all_alive_mutex);
-
 	time_since_last_meal = get_time() - philo->last_meal;
 	if (time_since_last_meal < philo->table->time_to_die)
-		return (1); // Le philosophe est vivant
+		return (1);
 	else
-	return (0); // Le philosophe est mort
+		return (0);
 }
-
 
 int	philosopher_died(t_philosopher *philo)
 {
@@ -59,8 +57,8 @@ void	check_philos(t_table *table)
 
 	while (1)
 	{
-		// if (check_total_meals(table->philo))
-		// 	break ;
+		if (check_total_meals(table->philo))
+			break ;
 		pthread_mutex_lock(&table->all_alive_mutex);
 		if (!table->all_alive)
 		{
@@ -87,13 +85,13 @@ void	clean_up(t_table *table)
 	int	i;
 
 	i = 0;
-	// while (i < table->philo_nbr)
-	// {
-	// 	if (pthread_join(table->philo[i].thread, NULL) != 0)
-	// 		printf(RED"Error : Failed to join thread %d\n"RST, i);
-	// 	i++;
-	// }
-	// i = 0;
+	while (i < table->philo_nbr)
+	{
+		if (pthread_join(table->philo[i].thread, NULL) != 0)
+			printf(RED"Error : Failed to join thread %d\n"RST, i);
+		i++;
+	}
+	i = 0;
 	while (i < table->philo_nbr)
 	{
 		pthread_mutex_destroy(&table->philo[i].meal_mutex);

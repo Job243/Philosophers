@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:31:05 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/21 00:10:14 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:03:11 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,14 @@ void	*philosopher_routine(void *arg)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)arg;
-	while (is_alive(philo))
+	while (is_alive(philo) && (philo->table->total_meals == -1
+			|| philo->meals_eaten < philo->table->total_meals))
 	{
 		eat(philo);
-		sleep_philo(philo);
-		think(philo);
+		think_n_sleep(philo);
 	}
 	return (NULL);
 }
-
-// void	*philosopher_routine(void *arg)
-// {
-// 	t_philosopher	*philo;
-
-// 	philo = (t_philosopher *)arg;
-// 	while (1)
-// 	{
-// 		if (!is_alive(philo))
-// 			break ;
-// 		// take_forks(philo);
-// 		eat(philo);
-// 		// release_forks(philo);
-// 		sleep_philo(philo);
-// 		think(philo);
-// 	}
-// 	return (NULL);
-// }
 
 void	created_threads(t_table *table)
 {
@@ -92,7 +74,6 @@ void	join_threads(t_table *table)
 		i++;
 	}
 }
-
 
 void	start_simulation(t_table *table)
 {

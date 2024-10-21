@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 18:17:28 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/21 00:01:58 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:02:24 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	check_total_meals(t_philosopher *philo)
 		pthread_mutex_lock(&philo->table->all_alive_mutex);
 		philo->table->all_alive = 0;
 		pthread_mutex_unlock(&philo->table->all_alive_mutex);
-		printf(BLUE "All philosophers have eaten" RST BLUE " the required number of meals!\n" RST);
+		printf(BLUE "All philosophers have eaten" RST
+			BLUE " the required number of meals!\n" RST);
 	}
 	return (full);
 }

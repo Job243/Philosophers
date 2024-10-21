@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:29:58 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/20 23:36:49 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:01:46 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-
 /*
 	1. faire un cas special pour un seul:
 		wait time to die puis le faire mourir
@@ -64,7 +63,7 @@ int	main(int ac, char **av)
 	2. ./philo 3 120 60 60
 		infinite loop
 	3. enlever release firks
-&& (philo->table->total_meals == -1 || philo->meals_eaten < philo->table->total_meals)
+
 	4.
 
 */
