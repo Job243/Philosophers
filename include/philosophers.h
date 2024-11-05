@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:08:59 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/21 16:21:23 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/31 20:41:57 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include <limits.h>
+# include <string.h>
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -30,15 +31,19 @@
 # define C "\e[1;96m"     /*Cyan*/
 # define W "\e[1;97m"     /*White*/
 
+typedef pthread_mutex_t t_mtx;
+
 typedef struct s_philosopher
 {
 	int				id;
 	int				meals_eaten;
 	long long		last_meal;
 	pthread_t		thread;
+	pthread_mutex_t ph_mutex;
 	pthread_mutex_t	meal_mutex;
-	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	meal_time;
 	struct s_table	*table;
 }					t_philosopher;
 
@@ -52,34 +57,41 @@ typedef struct s_table
 	int				all_alive;
 	long			start_time;
 	pthread_mutex_t	all_alive_mutex;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	output_mutex;
+	pthread_mutex_t	print_mutex;
 	t_philosopher	*philo;
 }					t_table;
 
+int					check_n_handle_death(t_philosopher *philo);
 int					check_total_meals(t_philosopher *philo);
 int					is_alive(t_philosopher *philo);
 int					is_space(char c);
 int					is_digit(int c);
-int					philosopher_died(t_philosopher *philo);
+int					ft_usleep(size_t milliseconds, t_philosopher *philo);
+
 const char			*valid_input(const char *str);
-void				assign_philo_number(t_table *table);
-void				check_philos(t_table *table);
+int				check_philos(t_table *table);
 void				clean_up(t_table *table);
 void				created_threads(t_table *table);
-void				eat(t_philosopher *philo);
+// void				eat(t_philosopher *philo);
 long				ft_atol(const char *str);
 void				ft_error(const char *msg);
 long				get_time(void);
-void				handle_philosopher_death(t_philosopher *philo);
 void				init_philosophers(t_table *table);
 void				join_threads(t_table *table);
 void				print_action(t_philosopher *philo, const char *action);
-void				release_forks(t_philosopher *philo);
-void				sleep_philo(t_philosopher *philo);
-void				take_forks(t_philosopher *philo);
+// void				release_forks(t_philosopher *philo);
+// void				sleep_philo(t_philosopher *philo);
+// void				take_forks(t_philosopher *philo);
 void				start_simulation(t_table *table);
-void				think_n_sleep(t_philosopher *philo);
+// void				think_n_sleep(t_philosopher *philo);
 void				*philosopher_routine(void *arg);
+
+int					eat(t_philosopher *philo);
+int					sleep_philo(t_philosopher *philo);
+int					take_forks_even(t_philosopher *philo);
+int					take_forks_odd(t_philosopher *philo);
+int					think(t_philosopher *philo);
+int					valid_arg(int ac, char **av);
+
 
 #endif

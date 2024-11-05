@@ -6,7 +6,7 @@
 /*   By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:52:25 by jmafueni          #+#    #+#             */
-/*   Updated: 2024/10/14 21:49:34 by jmafueni         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:30:52 by jmafueni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,28 @@ long	ft_atol(const char *str)
 
 	num = 0;
 	str = valid_input(str);
+	if (!str)
+		return (0);
 	while (is_digit(*str))
 		num = num * 10 + *str++ - 48;
 	if (num > INT_MAX)
 		return (0);
 	return (num);
+}
+
+int	valid_arg(int ac, char **av)
+{
+	int	i;
+
+	if (ac < 5 || ac > 6)
+		ft_error(RED"ERROR: Wrong input\n"RST G"Usage: <number_of_philosopher>"RST
+			G" <time_to_die> <time_to_eat> <time_to_sleep>\n"RST);
+	i = 1;
+	while (i < ac)
+	{
+		if (ft_atol(av[i]) <= 0)
+			ft_error(RED"ERROR: All arguments must be positive numbers\n"RST);
+		i++;
+	}
+	return (1);
 }

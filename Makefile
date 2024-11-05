@@ -6,7 +6,7 @@
 #    By: jmafueni <jmafueni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 19:29:05 by jmafueni          #+#    #+#              #
-#    Updated: 2024/10/19 20:08:25 by jmafueni         ###   ########.fr        #
+#    Updated: 2024/10/30 15:58:23 by jmafueni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC = $(SRC_DIR)/init.c $(SRC_DIR)/philo.c $(SRC_DIR)/utils.c $(SRC_DIR)/routine
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
+FLAGS = -Wall -Wextra -Werror -pthread  -g3
 
 all: $(OBJ_DIR) $(NAME)
 
